@@ -1,0 +1,91 @@
+[
+    {
+        "nombre": "335 - En la vergonzosa cruz",
+        "clasificacion": "himnario"
+    },
+    {
+        "nombre": "82 - Día Feliz",
+        "clasificacion": "himnario"
+    },
+    {
+        "nombre": "171 - Santo Espíritu desciende",
+        "clasificacion": "himnario"
+    },
+    {
+        "nombre": "192 - Me hirió el pecado",
+        "clasificacion": "himnario"
+    },
+    {
+        "nombre": "Medley - 2",
+        "clasificacion": "carpeta"
+    },
+    {
+        "nombre": "Medley - 1",
+        "clasificacion": "carpeta"
+    },
+    {
+        "nombre": "Gloria a Dios",
+        "clasificacion": "carpeta"
+    },
+    {
+        "nombre": "Alzo mis manos",
+        "clasificacion": "carpeta"
+    },
+    {
+        "nombre": "A solas con el maestro",
+        "clasificacion": "carpeta"
+    },
+    {
+        "nombre": "Jesus es mi pastor",
+        "clasificacion": "carpeta"
+    },
+    {
+        "nombre": "Glorioso",
+        "clasificacion": "rapida"
+    },
+    {
+        "nombre": "te daré lo mejor",
+        "clasificacion": "rapida"
+    },
+    {
+        "nombre": "Música del cielo",
+        "clasificacion": "rapida"
+    },
+    {
+        "nombre": "Bueno es alabar",
+        "clasificacion": "rapida"
+    },
+    {
+        "nombre": "abre mis ojos",
+        "clasificacion": "rapida"
+    },
+
+    {
+        "nombre": "Jesus eres mi buen pastor",
+        "clasificacion": "adoracion"
+    },
+    {
+        "nombre": "Aquí estás",
+        "clasificacion": "adoracion"
+    },
+    {
+        "nombre": "La Bendición",
+        "clasificacion": "adoracion"
+    },
+    {
+        "nombre": "Estar Contigo",
+        "clasificacion": "adoracion"
+    },
+    {
+        "nombre": "Gracias quiero darte",
+        "clasificacion": "adoracion"
+    },
+    {
+        "nombre": "Tu me haces tan feliz",
+        "clasificacion": "adoracion"
+    },
+    {
+        "nombre": "A ti atribuimos la gloria",
+        "clasificacion": "adoracion"
+    }
+]
