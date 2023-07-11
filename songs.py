@@ -48,14 +48,11 @@ def generate_list(db_manager):
     # necesito dos canciones de cada clasificacion que tengan prioridad alta
     random_daily_songs = {}
     clasification_type = ["himnario", "carpeta", "rapida", "adoracion"]
-    priority_type = "high"
     for clasification in clasification_type:
-        selected_songs = db_manager.get_song_by_priority(priority_type)
-        selected_songs = [song for song in selected_songs if song["clasification"] == clasification]
-        if len(selected_songs) >= 2:
-            random_songs = random.sample(selected_songs, 2)
-        else:
-            random_songs = selected_songs
+        selected_songs = db_manager.get_song_by_priority("high")
+        selected_songs = [song for song in selected_songs if song['clasification'] == clasification]
+        random.shuffle(selected_songs)  # Mezcla aleatoria de las canciones
+        random_songs = selected_songs[:2]  # Selecciona las primeras dos canciones de la lista mezclada
         random_daily_songs[clasification] = random_songs
 
     return random_daily_songs
@@ -88,7 +85,7 @@ async def main():
     db_instance = connect_bd()
     list_name = "song-list.json"
     songs = load_songs(list_name)
-    populate_db(db_instance, songs)
+    populate_db(db_instance, songs) if not db_instance.collection_has_data() else None
     BOT_TOKEN = os.getenv("BOT_TOKEN")
     CHAT_ID = os.getenv("CHAT_ID")
     random_daily_songs = generate_list(db_instance)

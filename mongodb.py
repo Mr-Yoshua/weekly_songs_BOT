@@ -20,6 +20,9 @@ class MongoDBManager:
     
     def get_song_by_priority(self, priority):
         return self.collection.find({"priority": priority})
+    
+    def collection_has_data(self):
+        return self.collection.count_documents({}) > 0
 
 def connect_to_mongo(url):
     return MongoDBManager(url)
