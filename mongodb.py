@@ -21,6 +21,9 @@ class MongoDBManager:
     def get_song_by_priority(self, priority):
         return self.collection.find({"priority": priority})
     
+    def get_songs_by_classification(self, classification):
+        return self.collection.find({"clasification": classification})
+    
     def collection_has_data(self):
         return self.collection.count_documents({}) > 0
 

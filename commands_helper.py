@@ -79,21 +79,15 @@ def handle_show_list_by_category(update: Update, context):
     song_classification = remove_accents(args[0].lower())
 
     db_manager = connect_to_mongo(URL_DB)
-    songs_cursor = db_manager.get_songs()
-
-    if not songs_cursor:
-        context.bot.send_message(chat_id=message.chat_id, text="No se encontraron canciones en la base de datos.")
+    songs_by_classification_cursor = db_manager.get_songs_by_classification(song_classification)
+    
+    if not songs_by_classification_cursor:
+        context.bot.send_message(chat_id=message.chat_id, text=f"No se encontraron canciones con clasificación '{song_classification}'.")
         return
 
-    songs = list(songs_cursor)
-    songs_with_classification = [song for song in songs if song.get('classification') == song_classification]
-
-    if not songs_with_classification:
-        context.bot.send_message(chat_id=message.chat_id, text=f"No se encontraron canciones con la clasificación '{song_classification}'.")
-        return
-
-    response = f"Canciones con clasificación '{song_classification}':\n"
-    for song in songs_with_classification:
-        response += f"- {song.get('name') or song.get('nombre')}\n"
-
+    songs_by_classification = list(songs_by_classification_cursor)
+    response = f"Listado de canciones en {song_classification}:\n"
+    for song in songs_by_classification:
+        response += f"- {song.get('nombre')}\n"
     context.bot.send_message(chat_id=message.chat_id, text=response)
+    
