@@ -1,7 +1,6 @@
 import os
 from telegram import Update
 from mongodb import connect_to_mongo
-from telegram.ext import Updater, CommandHandler
 from dotenv import load_dotenv
 from datetime import datetime
 from unidecode import unidecode
@@ -67,3 +66,34 @@ def handle_search_song(update: Update, context):
 
     context.bot.send_message(chat_id=message.chat_id, text=response)
 
+def handle_show_list_by_category(update: Update, context):
+    load_dotenv()
+    URL_DB = os.getenv("URL_DB")
+    message = update.message
+    args = message.text.split(maxsplit=1)[1].split(',', maxsplit=1)
+    args = [arg.strip() for arg in args]
+    if len(args) < 1:
+        context.bot.send_message(chat_id=message.chat_id, text="Por favor, proporcione la clasificación de la canción.")
+        return
+
+    song_classification = remove_accents(args[0].lower())
+
+    db_manager = connect_to_mongo(URL_DB)
+    songs_cursor = db_manager.get_songs()
+
+    if not songs_cursor:
+        context.bot.send_message(chat_id=message.chat_id, text="No se encontraron canciones en la base de datos.")
+        return
+
+    songs = list(songs_cursor)
+    songs_with_classification = [song for song in songs if song.get('classification') == song_classification]
+
+    if not songs_with_classification:
+        context.bot.send_message(chat_id=message.chat_id, text=f"No se encontraron canciones con la clasificación '{song_classification}'.")
+        return
+
+    response = f"Canciones con clasificación '{song_classification}':\n"
+    for song in songs_with_classification:
+        response += f"- {song.get('name') or song.get('nombre')}\n"
+
+    context.bot.send_message(chat_id=message.chat_id, text=response)
